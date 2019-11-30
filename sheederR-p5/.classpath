@@ -3,5 +3,6 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="lib" path="C:/Program Files/Java/jre1.8.0_231/lib/ext/jfxrt.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/Users/Richard/eclipse-workspace/sheederR-p5/src/derby.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

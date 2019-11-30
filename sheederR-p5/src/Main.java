@@ -15,8 +15,28 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class Main extends Application {
+	String instrumentType;
+	String instrumentBrand;
+	String warehouseLocation;
+	String maxCostAmountString;
+	int maxCostAmount;
+	
+	String instrumentTypes[] = {"guitar", "bass", "keyboard"};
+	ComboBox instrumentTypeComboBox = new ComboBox(FXCollections.observableArrayList(instrumentTypes));
+	
+	String instrumentBrands[] = {"yamaha", "gibson", "fender", "roland", "alesis"};
+	ComboBox instrumentBrandComboBox = new ComboBox(FXCollections.observableArrayList(instrumentBrands));
+	
+	String warehouseLocations[] = {"Pensacola Florida", "Charlotte North Carolina" , "Dallas Fort Worth Texas"};
+	ComboBox warehouseLocationsComboBox = new ComboBox(FXCollections.observableArrayList(warehouseLocations));
+	
+	TextField costTextField = new TextField();
 	
 	public void start(Stage stage) {
+	instrumentTypeComboBox.setValue("guitar");
+	instrumentBrandComboBox.setValue("yamaha");
+	warehouseLocationsComboBox.setValue("Pensacola Florida");
+		
 	BorderPane borderPane = new BorderPane();
 	Text instrumentTypeLabel = new Text("Instrument Type: ");
 	Text instrumentBrandLabel = new Text("Instrument Brand: ");
@@ -28,20 +48,24 @@ public class Main extends Application {
    		 
          @Override
          public void handle(ActionEvent event) {
-        	 System.out.println("Submit Button Pressed");
+        	System.out.println("Submit Button Pressed");
+        	instrumentType = (String) instrumentTypeComboBox.getValue();
+        	instrumentBrand = (String) instrumentBrandComboBox.getValue();
+        	maxCostAmountString = (String) costTextField.getText();
+        	maxCostAmount = Integer.parseInt(maxCostAmountString);
+        	warehouseLocation = (String) warehouseLocationsComboBox.getValue();
+        	System.out.println(instrumentType + "\n" + instrumentBrand + "\n" + maxCostAmount + "\n" + warehouseLocation);
+        	
+        	try {
+				TestDB.main(new String[0], instrumentType, instrumentBrand, warehouseLocation, maxCostAmount);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
          }
     });
 	 
-	String instrumentTypes[] = {"InstrumentType 1", "InstrumentType 2"};
-	ComboBox instrumentTypeComboBox = new ComboBox(FXCollections.observableArrayList(instrumentTypes));
 	
-	String instrumentBrands[] = {"InstrumentBrand 1", "InstrumentBrand 2"};
-	ComboBox instrumentBrandComboBox = new ComboBox(FXCollections.observableArrayList(instrumentBrands));
-	
-	String warehouseLocations[] = {"WarehouseLocation 1", "WarehouseLocation 2"};
-	ComboBox warehouseLocationsComboBox = new ComboBox(FXCollections.observableArrayList(warehouseLocations));
-	
-	TextField costTextField = new TextField();
 	
 	VBox vbox = new VBox(20);
 	vbox.setAlignment(Pos.CENTER);
